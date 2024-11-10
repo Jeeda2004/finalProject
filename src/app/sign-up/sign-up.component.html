@@ -2,29 +2,53 @@
   <h4>Sign Up</h4>
 </div>
 
-<form class="mt-3">
-  <!-- Full Name -->
+<form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)" class="mt-3" novalidate>
+  <!-- First Name -->
   <div class="mb-3">
-    <label for="fullName" class="form-label">Full Name</label>
-    <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required />
+    <label for="firstName" class="form-label">First Name</label>
+    <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Enter your first name" [(ngModel)]="student.firstName" required />
+    <small *ngIf="signUpForm.submitted && !signUpForm.controls['firstName']?.valid" class="text-danger">
+      First Name is required.
+    </small>
+  </div>
+
+  <!-- Last Name -->
+  <div class="mb-3">
+    <label for="lastName" class="form-label">Last Name</label>
+    <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Enter your last name" [(ngModel)]="student.lastName" required />
+    <small *ngIf="signUpForm.submitted && !signUpForm.controls['lastName']?.valid" class="text-danger">
+      Last Name is required.
+    </small>
   </div>
 
   <!-- Email -->
   <div class="mb-3">
     <label for="email" class="form-label">Email</label>
-    <input type="email" class="form-control" id="email" placeholder="Enter your email" required />
+    <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" [(ngModel)]="student.email" #email="ngModel" required email/>
+    <small *ngIf="signUpForm.submitted && email.errors?.['required']" class="text-danger">
+      Email is required
+    </small>
+    <small *ngIf="signUpForm.submitted && email.errors?.['email']" class="text-danger">
+      Please enter a valid email address.
+    </small>
   </div>
 
   <!-- Password -->
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="Enter your password" required />
+    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" [(ngModel)]="student.password" required />
+    <small *ngIf="signUpForm.submitted && !signUpForm.controls['password']?.valid" class="text-danger">
+      Password is required.
+    </small>
   </div>
 
   <!-- Confirm Password -->
   <div class="mb-3">
     <label for="confirmPassword" class="form-label">Confirm Password</label>
-    <input type="password" class="form-control" id="confirmPassword" placeholder="Re-enter your password" required />
+    <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Re-enter your password" [(ngModel)]="confirmPassword" required />
+    <small *ngIf="signUpForm.submitted && confirmPassword !== student.password" class="text-danger">
+      Passwords do not match.
+    </small>
   </div>
 
   <!-- Submit Button -->
