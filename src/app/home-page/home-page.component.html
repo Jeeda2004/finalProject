@@ -1,1 +1,10 @@
-<h1>Welcome, {{ this.fullName }}</h1>
+<div class="home-container">
+    <h1>Welcome to the Homepage!</h1>
+    <p *ngIf="currentStudent">
+      Hello, {{ currentStudent.firstName }} {{ currentStudent.lastName }}!
+    </p>
+    <p *ngIf="!currentStudent">
+      No student is currently logged in.
+    </p>
+  </div>
+  

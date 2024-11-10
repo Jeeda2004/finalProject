@@ -1,18 +1,27 @@
 from flask import Flask, request, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 import os
-
-
+from flask_cors import CORS
+import pymysql
+from sqlalchemy import create_engine
 
 app = Flask(__name__)
+
+# Configure without specific database
+default_engine = create_engine('mysql+pymysql://root:password@localhost/', echo=True)
+
+# Create database if it doesn't exist
+with default_engine.connect() as conn:
+    conn.execute("COMMIT")  # Required because MySQL uses transactions
+    conn.execute("CREATE DATABASE IF NOT EXISTS CLUB")
+
+# Now configure with the specific database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@localhost/CLUB'
-
 app.config['SECRET_KEY'] = os.urandom(24)
-
 db = SQLAlchemy(app)
 
-# Define the User model
-class User(db.Model):
+
+class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)  # Store plain text password
@@ -42,15 +51,15 @@ def register():
             return jsonify({'error': 'Username and password are required'}), 400
 
         # Check if username is already taken
-        if User.query.filter_by(username=username).first():
+        if Student.query.filter_by(username=username).first():
             return jsonify({'error': 'Username already exists'}), 400
 
         # Create new user and add to the database
-        new_user = User(username=username, password=password)
-        db.session.add(new_user)
+        new_student = Student(username=username, password=password)
+        db.session.add(new_student)
         db.session.commit()
 
-        return jsonify({'message': 'User registered successfully'}), 201
+        return jsonify({'message': 'Student registered successfully'}), 201
 
     except Exception as e:
         print("Error:", e)  # For debugging purposes
@@ -64,10 +73,10 @@ def login():
     username = data.get('username')
     password = data.get('password')
 
-    user = User.query.filter_by(username=username, password=password).first()
+    student = Student.query.filter_by(username=username, password=password).first()
 
-    if user:
-        session['user_id'] = user.id
+    if student:
+        session['user_id'] = student.id
         return jsonify({'message': 'Login successful'}), 200
     else:
         return jsonify({'error': 'Invalid username or password'}), 401

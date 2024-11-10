@@ -1,40 +1,40 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Student } from './student.model';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+
 @Injectable({
   providedIn: 'root'
 })
-export class StudentService{
-  private students: Student[]=[];
-  private currentStudent: Student | null=null;
-  constructor(){}
+export class StudentService {
+  private baseUrl = 'http://localhost:5000'; // URL to web api
 
-  setCurrentStudent(student: Student): void {
-    this.currentStudent = student;
+  constructor(private http: HttpClient, private router: Router) {}
+
+  registerStudent(student: Student): Observable<any> {
+    return this.http.post(`${this.baseUrl}/register`, student);
+  }
+
+  loginStudent(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/login`, {username, password});
+  }
+
+  getAllStudents(): Observable<Student[]> {
+    return this.http.get<Student[]>(`${this.baseUrl}/students`);
   }
 
   getCurrentStudent(): Student | null {
-    return this.currentStudent;
+    const studentData = localStorage.getItem('currentStudent');
+    return studentData ? JSON.parse(studentData) as Student : null;
   }
 
-
-  registerStudent(student: Student): string {
-    this.students.push(student); // Add the student to the array
-    this.setCurrentStudent(student);
-    console.log('Mock Registration Successful!', student);
-    return 'Mock Registration Successful!';
-  }
-  
-  getAllStudents(): Student[] {
-    return this.students;
+  setSession(student: any): void {
+    localStorage.setItem('currentStudent', JSON.stringify(student));
   }
 
-  getStudentByEmail(email: string): Student | undefined {
-    return this.students.find((student) => student.email === email);
-  }
-
-
-  getStudentFullName(email: string): string | undefined {
-    const student = this.getStudentByEmail(email);
-    return student ? `${student.firstName} ${student.lastName}` : undefined;
+  logout(): void {
+    localStorage.removeItem('currentStudent');
+    this.router.navigate(['/login']);
   }
 }

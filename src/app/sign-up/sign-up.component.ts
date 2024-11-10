@@ -6,34 +6,30 @@ import { Student } from '../student.model';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.css'
+  styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent {
-  student: Student=new Student('','','','');
-  confirmPassword:string='';
-
+  student: Student = new Student('', '', '', '');
+  confirmPassword: string = '';
 
   constructor(
     private studentService: StudentService,
     private router: Router
-  ){}
-  
+  ) {}
+
   onSubmit(form: any) {
-    if (!form.valid) {
-      console.log('Form is invalid!');
-      return;
+    if (form.valid && this.student.password === this.confirmPassword) {
+      this.studentService.registerStudent(this.student).subscribe({
+        next: (response) => {
+          console.log('Registration successful!', response);
+          this.router.navigate(['/home']);
+        },
+        error: (error) => {
+          console.error('Registration failed:', error);
+        }
+      });
+    } else {
+      console.log('Form is invalid or passwords do not match!');
     }
-
-    if (this.student.password !== this.confirmPassword) {
-      console.log('Passwords do not match!');
-      return;
-    }
-
-    // Register the student
-    this.studentService.registerStudent(this.student);
-
-    // Redirect to the home page (or wherever you need)
-    console.log('Registration Successful!');
-    this.router.navigate(['/home']);
   }
 }
