@@ -44,6 +44,7 @@ export class StudentService {
               username: response.username
             };
             localStorage.setItem('currentStudent', JSON.stringify(studentData)); // Store student data in localStorage
+          
           }
         })
       );

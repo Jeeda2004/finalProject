@@ -87,13 +87,19 @@ def login():
         data = request.get_json()
         username = data.get('username')
         password = data.get('password')
+        
 
         # Verify the student (check username and password)
         student = Student.query.filter_by(username=username, password=password).first()
 
         if student:
             session['student_id'] = student.id  # Use student_id instead of user_id
-            return jsonify({'message': 'Login successful'}), 200
+            return jsonify({
+                'message': 'Login successful',
+                'first_name': student.first_name,
+                'last_name': student.last_name,
+                'username': student.username
+            }), 200
         else:
             return jsonify({'error': 'Invalid username or password'}), 401
 
