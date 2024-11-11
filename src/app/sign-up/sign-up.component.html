@@ -23,13 +23,10 @@
 
   <!-- Email -->
   <div class="mb-3">
-    <label for="email" class="form-label">Email</label>
-    <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" [(ngModel)]="student.email" #email="ngModel" required email/>
-    <small *ngIf="signUpForm.submitted && email.errors?.['required']" class="text-danger">
-      Email is required
-    </small>
-    <small *ngIf="signUpForm.submitted && email.errors?.['email']" class="text-danger">
-      Please enter a valid email address.
+    <label for="username" class="form-label">Email</label>
+    <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username" [(ngModel)]="student.username" #email="ngModel" required/>
+    <small *ngIf="signUpForm.submitted && !signUpForm.controls['username']?.valid" class="text-danger">
+      Username is required.
     </small>
   </div>
 

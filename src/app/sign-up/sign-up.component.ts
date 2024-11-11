@@ -18,18 +18,30 @@ export class SignUpComponent {
   ) {}
 
   onSubmit(form: any) {
-    if (form.valid && this.student.password === this.confirmPassword) {
-      this.studentService.registerStudent(this.student).subscribe({
-        next: (response) => {
-          console.log('Registration successful!', response);
-          this.router.navigate(['/home']);
-        },
-        error: (error) => {
-          console.error('Registration failed:', error);
-        }
-      });
-    } else {
-      console.log('Form is invalid or passwords do not match!');
-    }
+  if (form.valid && this.student.password === this.confirmPassword) {
+    console.log({
+      username: this.student.username, 
+      password: this.student.password,
+      firstName: this.student.firstName,
+      lastName: this.student.lastName
+    });    
+    this.studentService.registerStudent({
+      username: this.student.username, 
+      password: this.student.password,
+      firstName: this.student.firstName,
+      lastName: this.student.lastName
+    }).subscribe({
+      next: (response) => {
+        console.log('Registration successful!', response);
+        this.router.navigate(['/home']);
+      },
+      error: (error) => {
+        console.error('Registration failed:', error);
+      }
+    });
+  } else {
+    console.log('Form is invalid or passwords do not match!');
   }
+}
+
 }
