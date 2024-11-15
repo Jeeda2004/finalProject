@@ -8,6 +8,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { ClubListComponent } from './club-list/club-list.component';
+import { ClubComponent } from './club/club.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ClubListComponent } from './club-list/club-list.component';
     SignUpComponent,
     HomePageComponent,
     LoginComponent,
-    ClubListComponent
+    ClubListComponent,
+    ClubComponent
   ],
   imports: [
     BrowserModule,
