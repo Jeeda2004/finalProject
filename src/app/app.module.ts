@@ -7,13 +7,16 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignUpComponent,
     HomePageComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +25,8 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule
   ],
   providers: [
-    provideHttpClient(withFetch())  // Configure HttpClient to use fetch here
+    provideHttpClient(withFetch()),
+    provideAnimationsAsync()  // Configure HttpClient to use fetch here
   ],
   bootstrap: [AppComponent]
 })
