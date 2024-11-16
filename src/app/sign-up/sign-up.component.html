@@ -21,9 +21,9 @@
     </small>
   </div>
 
-  <!-- Email -->
+  <!-- Username -->
   <div class="mb-3">
-    <label for="username" class="form-label">Email</label>
+    <label for="username" class="form-label">Username</label>
     <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username" [(ngModel)]="student.username" #email="ngModel" required/>
     <small *ngIf="signUpForm.submitted && !signUpForm.controls['username']?.valid" class="text-danger">
       Username is required.
