@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { ClubListComponent } from './club-list/club-list.component';
 import { ClubComponent } from './club/club.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ClubComponent } from './club/club.component';
     HomePageComponent,
     LoginComponent,
     ClubListComponent,
-    ClubComponent
+    ClubComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,

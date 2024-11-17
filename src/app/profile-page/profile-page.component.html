@@ -1,0 +1,11 @@
+<div>
+    <div *ngIf="firstName && lastName">
+        <h1>{{ firstName }}'s Profile Page</h1>
+        <p>Full Name: {{ firstName }} {{ lastName }}</p>
+        <p>Username: {{ username }} </p>
+    </div>
+    <div *ngIf="!firstName || !lastName">
+      <p>No student is currently logged in.</p>
+    </div>
+</div>
+  

@@ -51,9 +51,11 @@ export class StudentService {
   }
 
   // Fetch current logged-in student
+  // Angular service method to get current student
   getCurrentStudent(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/current_student`, { withCredentials: true });
+    return this.http.get<Student>(`http://localhost:5000/current_student`, { withCredentials: true });
   }
+
 
   // Retrieve current student session from localStorage
   getSession(): Student | null {

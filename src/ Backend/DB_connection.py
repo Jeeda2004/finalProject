@@ -60,7 +60,7 @@ def register():
         # Add the new student to the database
         new_student = Student(
             username=username,
-            password=password,  # Replace with hashed password if needed
+            password=password,  
             first_name=first_name,
             last_name=last_name
         )
@@ -93,7 +93,7 @@ def login():
         student = Student.query.filter_by(username=username, password=password).first()
 
         if student:
-            session['student_id'] = student.id  # Use student_id instead of user_id
+            session['student_id'] = student.id  
             return jsonify({
                 'message': 'Login successful',
                 'first_name': student.first_name,
