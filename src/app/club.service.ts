@@ -1,18 +1,20 @@
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Club } from './club.model';
+import { Club } from './club.model'; // Adjust the path to your interface
+
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class ClubService {
+    private apiUrl = 'http://localhost:5000/clubs';
 
-  constructor() { }
-  
-  getClubs(): Club[]{
-    const Clubs: Club[] =[
-      {clubName:'yMath', clubHead: 'Farkh Leka', logo:'assets/logos/math.jpg',description:'This is a math club'},
-      {clubName:'cScience', clubHead: 'Sara Zako', logo:'assets/logos/science.jpg',description:'This is a science club'}
-    ] 
-      return Clubs;
-  }
+    constructor(private http: HttpClient) {}
 
+    getClubs(): Observable<Club[]> {
+        return this.http.get<Club[]>(this.apiUrl);
+    }
 }
+
+
+
