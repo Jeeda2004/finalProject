@@ -63,6 +63,14 @@ export class StudentService {
     return studentData ? JSON.parse(studentData) : null;
   }
 
+  // Method to get only student ID from the session
+  getStudentId(): string | null {
+    const studentData = localStorage.getItem('currentStudent');
+    const student = studentData ? JSON.parse(studentData) : null;
+    return student ? student.id : null; 
+  }
+
+
   // Logout student
   logout(): void {
     localStorage.removeItem('currentStudent'); // Remove the session data from localStorage

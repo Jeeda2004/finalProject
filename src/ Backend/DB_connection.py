@@ -4,7 +4,7 @@ import os
 from flask_cors import CORS
 from sqlalchemy import create_engine, text
 import csv
-
+from datetime import datetime
 
 app = Flask(__name__)
 # app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # or 'Strict'
@@ -28,9 +28,10 @@ db = SQLAlchemy(app)
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(128), nullable=False)  # Password should ideally be hashed
-    first_name = db.Column(db.String(80), nullable=False)  # Add first name
-    last_name = db.Column(db.String(80), nullable=False)   # Add last name
+    password = db.Column(db.String(128), nullable=False)  
+    first_name = db.Column(db.String(80), nullable=False)  
+    last_name = db.Column(db.String(80), nullable=False)   
+    clubs = db.relationship('Membership', back_populates='student')
 
 class Club(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -38,7 +39,16 @@ class Club(db.Model):
     club_head = db.Column(db.String(100), nullable=False)
     logo = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=True)
+    members = db.relationship('Membership', back_populates='club')
 # Function to create tables
+
+class Membership(db.Model):
+    student_id = db.Column(db.Integer, db.ForeignKey('student.id'), primary_key=True)
+    club_id = db.Column(db.Integer, db.ForeignKey('club.id'), primary_key=True)
+    join_date = db.Column(db.DateTime, default=datetime.utcnow)
+    student = db.relationship("Student", back_populates="clubs")
+    club = db.relationship("Club", back_populates="members")
+
 def create_tables():
     with app.app_context():
         db.create_all()
@@ -177,6 +187,31 @@ def get_club_by_name(club_name):
             "description": club.description
         }), 200
     return jsonify({'error': 'Club not found'}), 404
+
+@app.route('/join_club/<club_name>', methods=['POST'])
+def join_club(club_name):
+    username = request.json.get('username')
+    if not username:
+        return jsonify({'error': 'Username is required'}), 400
+    
+    student = Student.query.filter_by(username=username).first()
+    if not student:
+        return jsonify({'error': 'Student not found'}), 404
+
+    club = Club.query.filter_by(club_name=club_name).first()
+    if not club:
+        return jsonify({'error': 'Club not found'}), 404
+
+    if Membership.query.filter_by(student_id=student.id, club_id=club.id).first():
+        return jsonify({'error': 'Membership already exists'}), 409
+
+    new_membership = Membership(student_id=student.id, club_id=club.id)
+    db.session.add(new_membership)
+    db.session.commit()
+
+    return jsonify({'message': 'Successfully joined the club'}), 201
+
+
 
 if __name__ == '__main__':
     create_tables()  # Initialize the database tables
