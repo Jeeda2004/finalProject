@@ -14,6 +14,10 @@ export class ClubService {
     getClubs(): Observable<Club[]> {
         return this.http.get<Club[]>(this.apiUrl);
     }
+
+    getClubByName(club_name: string): Observable<Club> {
+        return this.http.get<Club>(`${this.apiUrl}/${club_name}`);
+    }
 }
 
 

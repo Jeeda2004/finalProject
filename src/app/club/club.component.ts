@@ -17,12 +17,18 @@ export class ClubComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const clubName = this.route.snapshot.paramMap.get('clubName');
-    if (clubName) {
-      this.clubService.getClubs().subscribe((data) => {
-        this.club = data.find((c) => c.clubName === clubName);
-      });
+    const club_name = this.route.snapshot.paramMap.get('club_name');
+    if (club_name) {
+        this.clubService.getClubByName(club_name).subscribe(
+            (data) => {
+                this.club = data;
+            },
+            (error) => {
+                console.error('Error fetching club:', error);
+            }
+        );
     }
-  }
+}
+
 }
 

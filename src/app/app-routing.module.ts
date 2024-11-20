@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'clubs', component: ClubListComponent },
-  { path: 'club/:clubName', component: ClubComponent },
+  { path: 'club/:club_name', component: ClubComponent },
   { path: 'profile', component: ProfilePageComponent },
   { path: '', redirectTo: '/signup', pathMatch: 'full' }
 ];

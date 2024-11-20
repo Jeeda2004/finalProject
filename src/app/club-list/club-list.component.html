@@ -2,11 +2,11 @@
     <h1>University Clubs</h1>
     <div class="row">
       <div class="col-md-4" *ngFor="let club of clubs">
-        <a [routerLink]="['/club', club.clubName]">
+        <a [routerLink]="['/club', club.club_name]">
           <div class="card club-card">
-            <img class="card-img-top" [src]="club.logo" [alt]="club.clubName">
+            <img class="card-img-top" [src]="club.logo" [alt]="club.club_name">
             <div class="card-body">
-              <h5 class="card-title">{{ club.clubName }}</h5>
+              <h5 class="card-title">{{ club.club_name }}</h5>
             </div>
           </div>
         </a>

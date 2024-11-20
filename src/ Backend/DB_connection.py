@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_cors import CORS
 from sqlalchemy import create_engine, text
-
+import csv
 
 
 app = Flask(__name__)
@@ -32,12 +32,44 @@ class Student(db.Model):
     first_name = db.Column(db.String(80), nullable=False)  # Add first name
     last_name = db.Column(db.String(80), nullable=False)   # Add last name
 
-
+class Club(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    club_name = db.Column(db.String(100), nullable=False)
+    club_head = db.Column(db.String(100), nullable=False)
+    logo = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=True)
 # Function to create tables
 def create_tables():
     with app.app_context():
         db.create_all()
 
+def seed_clubs_from_csv(csv_path):
+    with app.app_context():
+        with open(csv_path, 'r') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                # Check if the club already exists to avoid duplicates
+                if not Club.query.filter_by(club_name=row['clubName']).first():
+                    club = Club(
+                        club_name=row['clubName'],
+                        club_head=row['clubHead'],
+                        logo=row['logo'],
+                        description=row['description']
+                    )
+                    db.session.add(club)
+            db.session.commit()
+        print("Clubs seeded successfully from CSV!")
+
+# Route to populate the clubs table from a CSV file
+@app.route('/seed_clubs', methods=['POST'])
+def seed_clubs():
+    csv_path = request.json.get('csv_path', 'clubs.csv')  # Default to `clubs.csv`
+    try:
+        seed_clubs_from_csv(csv_path)
+        return jsonify({'message': 'Clubs seeded successfully'}), 200
+    except Exception as e:
+        print("Error seeding clubs:", e)
+        return jsonify({'error': 'Failed to seed clubs'}), 500
 
 # Route to register a new student
 @app.route('/register', methods=['POST'])
@@ -124,7 +156,29 @@ def current_student():
     return jsonify({'error': 'No student logged in'}), 401
 
 
+@app.route('/clubs', methods=['GET'])
+def get_clubs():
+    print(request.headers)  # Debugging: Check what headers are being sent
+    clubs = Club.query.all()
+    return jsonify([
+        {"id": club.id, "club_name": club.club_name, "club_head": club.club_head, "logo": club.logo ,"description": club.description}
+        for club in clubs
+    ]), 200
+
+@app.route('/clubs/<club_name>', methods=['GET'])
+def get_club_by_name(club_name):
+    club = Club.query.filter_by(club_name=club_name).first()
+    if club:
+        return jsonify({
+            "id": club.id,
+            "club_name": club.club_name,
+            "club_head": club.club_head,
+            "logo": club.logo,
+            "description": club.description
+        }), 200
+    return jsonify({'error': 'Club not found'}), 404
 
 if __name__ == '__main__':
     create_tables()  # Initialize the database tables
+    seed_clubs_from_csv('src\ Backend\clubs.csv')
     app.run(debug=True, host='0.0.0.0', port=5000) 

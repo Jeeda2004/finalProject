@@ -1,12 +1,12 @@
 export class Club {
-    clubName: string = '';
-    clubHead: string = '';
+    club_name: string = '';
+    club_head: string = '';
     logo: string = '';
     description: string = '';
   
-    constructor(clubName: string, clubHead: string, logo: string, description: string) {
-      this.clubName = clubName;
-      this.clubHead = clubHead;
+    constructor(club_name: string, club_head: string, logo: string, description: string) {
+      this.club_name = club_name;
+      this.club_head = club_head;
       this.logo = logo;
       this.description = description;
     }
