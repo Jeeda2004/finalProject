@@ -4,6 +4,8 @@ import os
 from flask_cors import CORS
 from sqlalchemy import create_engine, text
 
+
+
 app = Flask(__name__)
 # app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # or 'Strict'
 # app.config['SESSION_COOKIE_SECURE'] = True  # Set to True if using HTTPS
@@ -22,7 +24,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:admin@localhost/CL
 app.config['SECRET_KEY'] = os.urandom(24)
 db = SQLAlchemy(app)
 
-# Define the Student model (renamed from user to student)
+# Define the Student model (renamed from user to student)``
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)

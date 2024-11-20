@@ -10,6 +10,9 @@ import { LoginComponent } from './login/login.component';
 import { ClubListComponent } from './club-list/club-list.component';
 import { ClubComponent } from './club/club.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
     LoginComponent,
     ClubListComponent,
     ClubComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    NavbarComponent
+
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,8 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
     ReactiveFormsModule
   ],
   providers: [
-    provideHttpClient(withFetch())  // Configure HttpClient to use fetch here
+    provideHttpClient(withFetch()),
+    provideAnimationsAsync()  // Configure HttpClient to use fetch here
   ],
   bootstrap: [AppComponent]
 })

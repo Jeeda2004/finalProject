@@ -1,0 +1,59 @@
+/* Main navigation container */
+.navbar {
+    background-color: #333;
+    padding: 1rem;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation list */
+.navbar-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Navigation items */
+.navbar-links li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation links */
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-family: Arial, sans-serif;
+}
+
+/* Hover effect */
+.navbar-links a:hover {
+    background-color: #555;
+}
+
+/* Active link (for Angular router) */
+.navbar-links a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Responsive design */
+@media screen and (max-width: 600px) {
+    .navbar-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .navbar-links a {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+}
