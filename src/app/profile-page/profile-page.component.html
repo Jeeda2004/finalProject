@@ -7,5 +7,19 @@
     <div *ngIf="!firstName || !lastName">
       <p>No student is currently logged in.</p>
     </div>
+    <div class="clubs-section">
+      <h3>Clubs You've Joined</h3>
+      <ul *ngIf="clubs.length > 0; else noClubs">
+        <li *ngFor="let club of clubs">
+          <h4>{{ club.club_name }}</h4>
+          <p><strong>Head:</strong> {{ club.club_head }}</p>
+          <p>{{ club.description }}</p>
+        </li>
+      </ul>
+      <ng-template #noClubs>
+        <p>You haven't joined any clubs yet.</p>
+      </ng-template>
+    </div>
+    
 </div>
   

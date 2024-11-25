@@ -1,0 +1,29 @@
+.clubs-section {
+    margin-top: 20px;
+  }
+  
+  .clubs-section h3 {
+    margin-bottom: 10px;
+  }
+  
+  .clubs-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .clubs-section li {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .clubs-section li h4 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .clubs-section li p {
+    margin: 5px 0;
+  }
+  

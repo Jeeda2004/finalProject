@@ -211,6 +211,43 @@ def join_club(club_name):
 
     return jsonify({'message': 'Successfully joined the club'}), 201
 
+@app.route('/student_clubs', methods=['POST'])
+def get_student_clubs():
+    try:
+        username = request.json.get('username')
+        if not username:
+            return jsonify({'error': 'Username is required'}), 400
+
+        # Find the student by username
+        student = Student.query.filter_by(username=username).first()
+        if not student:
+            return jsonify({'error': 'Student not found'}), 404
+
+        # Fetch clubs joined by the student
+        memberships = Membership.query.filter_by(student_id=student.id).all()
+        clubs = [membership.club for membership in memberships]
+
+        return jsonify([
+            {
+                "id": club.id,
+                "club_name": club.club_name,
+                "club_head": club.club_head,
+                "logo": club.logo,
+                "description": club.description
+            }
+            for club in clubs
+        ]), 200
+    except Exception as e:
+        print("Error fetching clubs:", e)
+        return jsonify({'error': 'Failed to fetch clubs'}), 500
+
+
+@app.route('/get_student_id/<username>', methods=['GET'])
+def get_student_id(username):
+    student = Student.query.filter_by(username=username).first()
+    if student:
+        return jsonify({"id": student.id}), 200
+    return jsonify({"error": "Student not found"}), 404
 
 
 if __name__ == '__main__':

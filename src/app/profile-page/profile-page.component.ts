@@ -1,42 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../student.service';
 
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
-  styleUrl: './profile-page.component.css'
+  styleUrls: ['./profile-page.component.css']
 })
-export class ProfilePageComponent {
+export class ProfilePageComponent implements OnInit {
   firstName: string = '';
   lastName: string = '';
   username: string = '';
-  
+  clubs: any[] = [];
+
   constructor(private studentService: StudentService) {}
 
   ngOnInit() {
-    // First check if student data is in localStorage
-    const storedStudent = this.studentService.getSession(); 
-    
+    console.log('ProfilePageComponent initialized'); // Check if component initializes
+  
+    const storedStudent = this.studentService.getSession();
+    console.log('Stored student:', storedStudent); // Check LocalStorage retrieval
+  
     if (storedStudent) {
-      // Use the data from localStorage if it exists
       this.firstName = storedStudent.firstName;
       this.lastName = storedStudent.lastName;
       this.username = storedStudent.username;
-    } else {
-      // If no session, fetch from backend
-      this.studentService.getCurrentStudent().subscribe(
+      console.log('Profile data:', this.firstName, this.lastName, this.username);
+  
+      // Fetch clubs joined by the student using the username
+      this.studentService.getStudentClubs(this.username).subscribe(
         (response) => {
-          // Assuming your response contains first_name, last_name, username
-          this.firstName = response.first_name;
-          this.lastName = response.last_name;
-          this.username = response.username;
+          this.clubs = response;
+          console.log('Clubs:', this.clubs); // Verify if clubs are retrieved
         },
         (error) => {
-          // Handle the error (no student is logged in)
-          console.log('No student logged in', error);
+          console.log('Error fetching clubs:', error);
         }
       );
+    } else {
+      console.log('No stored student found');
     }
   }
+  
+  
+  
 }
-

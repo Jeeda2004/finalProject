@@ -63,13 +63,6 @@ export class StudentService {
     return studentData ? JSON.parse(studentData) : null;
   }
 
-  // Method to get only student ID from the session
-  getStudentId(): string | null {
-    const studentData = localStorage.getItem('currentStudent');
-    const student = studentData ? JSON.parse(studentData) : null;
-    return student ? student.id : null; 
-  }
-
 
   // Logout student
   logout(): void {
@@ -81,4 +74,13 @@ export class StudentService {
   getAllStudents(): Observable<Student[]> {
     return this.http.get<Student[]>(`${this.baseUrl}/students`);
   }
+
+
+  // Fetch clubs the student has joined using the username
+  getStudentClubs(username: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/student_clubs`, { username });
+  }
+
+
+
 }
