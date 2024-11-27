@@ -75,8 +75,8 @@
 
 @media (max-width: 600px) {
   .club-logo-card {
-    max-width: 100%; /* Takes up full width on smaller screens */
-    height: 200px; /* Smaller height for mobile */
+    max-width: 100%; 
+    height: 200px; 
   }
 
   .club-info-card,
@@ -97,5 +97,53 @@
   .join-button {
     font-size: 14px;
     padding: 8px 16px;
+  }
+}
+.members-list-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.members-list-card h3 {
+  font-size: 20px;
+  color: #1d4350;
+  margin-bottom: 15px;
+}
+
+.members-list-card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.members-list-card table th,
+.members-list-card table td {
+  text-align: left;
+  padding: 10px;
+  font-size: 16px;
+  color: #323d4f;
+  border-bottom: 1px solid #ddd;
+}
+
+.members-list-card table th {
+  background-color: #f4f4f4;
+  color: #1d4350;
+}
+
+.members-list-card table tr:hover {
+  background-color: #f9f9f9;
+}
+
+@media (max-width: 600px) {
+  .members-list-card table th,
+  .members-list-card table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .members-list-card h3 {
+    font-size: 18px;
   }
 }

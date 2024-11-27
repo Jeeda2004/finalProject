@@ -12,7 +12,6 @@ import { StudentService } from '../student.service';
 export class ClubComponent implements OnInit {
   club: Club | undefined;
   members: any[] = [];
-  showMembers = false;
 
   constructor(
     private clubService: ClubService,
@@ -67,7 +66,4 @@ export class ClubComponent implements OnInit {
     }
   }
 
-  toggleMembersList(): void {
-    this.showMembers = !this.showMembers; // Toggle the flag
-  }
 }

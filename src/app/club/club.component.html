@@ -17,20 +17,25 @@
     <p>{{ club?.description }}</p>
   </div>
 
-  <div class="club-action-card">
-
-    <div class="club members list">
-      <button (click)="toggleMembersList()">
-        {{ showMembers ? 'Hide' : 'Show' }} Members
-      </button>
-    
-      <!-- Conditional rendering of ClubMembersComponent
-      <app-club-members
-        *ngIf="showMembers"
-        [members]="members">
-      </app-club-members>
-    </div> -->
-
-    <button class="join-button" (click)="joinClub()" *ngIf="club">Join Club</button>
+  <div class="members-list-card">
+    <h3>Club Members</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let member of members">
+          <td>{{ member.username }}</td>
+          <td>{{ member.first_name }}</td>
+          <td>{{ member.last_name }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
+  <button class="join-button" (click)="joinClub()" *ngIf="club">Join Club</button>
 </div>
