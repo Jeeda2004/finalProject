@@ -38,17 +38,23 @@ export class ClubComponent implements OnInit {
   joinClub(): void {
     const student = this.studentService.getSession(); // Assuming this returns the student object
     if (!student || !student.username) {
-        alert('Please log in to join the club.');
-        return;
+      alert('Please log in to join the club.');
+      return;
     }
-
+  
     if (this.club?.club_name) {
       this.clubService.joinClub(this.club.club_name, student.username).subscribe({
-        next: (response) => alert('You have successfully joined the club!'),
-        error: (error) => alert('Error joining club: ' + error.message)
+        next: (response) => {
+          alert('You have successfully joined the club!');
+          this.getClubMembers(); // Refresh the members list after joining
+        },
+        error: (error) => {
+          alert('Error joining club: ' + error.message);
+        },
       });
     }
   }
+  
 
 
 
