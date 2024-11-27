@@ -1,54 +1,77 @@
-/* Main navigation container */
+
 .navbar {
-    background-color: #333;
+    background-color: #323D4F;
     padding: 1rem;
     width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; 
 }
 
-/* Navigation list */
+
+.navbar-logo {
+    flex: 1; 
+}
+
+.navbar-logo img {
+    height: 50px;
+    width: auto; 
+    display: block;
+    margin: 0;
+    margin-left: 20px;
+    border-radius: 10px;
+}
+
+
 .navbar-links {
     list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end; 
     align-items: center;
+    flex: 2; 
     gap: 1rem;
 }
 
-/* Navigation items */
+
 .navbar-links li {
     margin: 0;
     padding: 0;
 }
 
-/* Navigation links */
+
 .navbar-links a {
     color: white;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
     transition: all 0.3s ease;
-    font-family: Arial, sans-serif;
+    font-family:monospace;
+    font-size: large;
 }
 
-/* Hover effect */
+
 .navbar-links a:hover {
-    background-color: #555;
+    background-color: #687186;
 }
 
-/* Active link (for Angular router) */
+
 .navbar-links a.active {
     background-color: #4CAF50;
     color: white;
 }
 
-/* Responsive design */
+
 @media screen and (max-width: 600px) {
     .navbar-links {
         flex-direction: column;
         gap: 0.5rem;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
     }
 
     .navbar-links a {
@@ -56,4 +79,67 @@
         width: 100%;
         text-align: center;
     }
+
+    .navbar-logo {
+        text-align: center;
+        margin-bottom: 1rem; 
+    }
+}
+
+
+.navbar .menu {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-button {
+    background-color: #323D4F;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s ease;
+    font-family:monospace;
+    font-size: large;
+}
+
+.menu-button:hover {
+    background-color: #687186;
+}
+
+.menu-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #687186;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.menu-content a,
+.menu-content button {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    display: block;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    cursor: pointer;
+    font-family:monospace;
+}
+
+.menu-content a:hover,
+.menu-content button:hover {
+    background-color: #babbbe;
+}
+
+.menu:hover .menu-content {
+    display: block;
 }

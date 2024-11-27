@@ -1,9 +1,8 @@
-<div>
-  <h1>Welcome to the Homepage!</h1>
-  <div *ngIf="firstName && lastName">
-    <p>Welcome, {{ firstName }} {{ lastName }}!</p>
+<div class="homepage-container">
+  <!-- Welcome Section -->
+  <div class="welc-section">
+    <h1><strong>Welcome to MyClubs</strong></h1>
+    <p>Your gateway to exploring and joining vibrant student communities.</p>
   </div>
-  <div *ngIf="!firstName || !lastName">
-    <p>No student is currently logged in.</p>
-  </div>
+
 </div>

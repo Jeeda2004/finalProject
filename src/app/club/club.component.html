@@ -1,10 +1,23 @@
-<div class="club-logo">
+<div class="club-container">
+  <div class="club-title">
+    <h1>Welcome to the <b>{{ club?.club_name }}</b> Club</h1>
+  </div>
+
+  <div class="club-logo-card">
     <img [src]="club?.logo" [alt]="club?.club_name" />
   </div>
-  <div class="container club-details">
-    <h1>Welcome to the <b>{{ club?.club_name }}</b> Club</h1>
-    <h3>Club Head: {{ club?.club_head }}</h3>
-    <p>{{ club?.description }}</p>
-    <button (click)="joinClub()" *ngIf="club">Join Club</button>
+
+  <div class="club-info-card">
+    <h3>Club Head</h3>
+    <p>{{ club?.club_head }}</p>
   </div>
-  
+
+  <div class="club-description-card">
+    <h3>Description</h3>
+    <p>{{ club?.description }}</p>
+  </div>
+
+  <div class="club-action-card">
+    <button class="join-button" (click)="joinClub()" *ngIf="club">Join Club</button>
+  </div>
+</div>

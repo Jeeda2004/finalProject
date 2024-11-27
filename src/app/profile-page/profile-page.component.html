@@ -1,25 +1,47 @@
-<div>
-    <div *ngIf="firstName && lastName">
-        <h1>{{ firstName }}'s Profile Page</h1>
-        <p>Full Name: {{ firstName }} {{ lastName }}</p>
-        <p>Username: {{ username }} </p>
+<div class="main-wrapper">
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <img src="assets/profile.png" alt="Profile Picture" class="profile-image-large">
+      <h1>{{ firstName }}</h1>
     </div>
-    <div *ngIf="!firstName || !lastName">
+  
+    <!-- Personal Details Card -->
+    <div *ngIf="firstName && lastName" class="card profile-card">
+      <div class="card-body">
+        <h2 class="card-title">Personal Details</h2>
+        <div class="profile-details">
+          <p><strong>Full Name:</strong> {{ firstName }} {{ lastName }}</p>
+          <p><strong>Username:</strong> {{ username }}</p>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="!firstName || !lastName" class="no-student">
       <p>No student is currently logged in.</p>
     </div>
-    <div class="clubs-section">
-      <h3>Clubs You've Joined</h3>
-      <ul *ngIf="clubs.length > 0; else noClubs">
-        <li *ngFor="let club of clubs">
-          <h4>{{ club.club_name }}</h4>
-          <p><strong>Head:</strong> {{ club.club_head }}</p>
-          <p>{{ club.description }}</p>
-        </li>
-      </ul>
-      <ng-template #noClubs>
-        <p>You haven't joined any clubs yet.</p>
-      </ng-template>
+  
+    <!-- Clubs Section Card -->
+    <div *ngIf="clubs.length > 0; else noClubs" class="card clubs-card">
+      <div class="card-body">
+        <h2 class="card-title">My Clubs</h2>
+        <div class="clubs-list">
+          <div class="club-card" *ngFor="let club of clubs">
+            <a [routerLink]="['/club', club.club_name]" class="club-link">
+            <img class="club-image" [src]="club.logo" [alt]="club.club_name">
+            <h4 class="club-name">{{ club.club_name }}</h4>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-    
-</div>
+  
+    <ng-template #noClubs>
+      <div class="card clubs-card">
+        <div class="card-body">
+          <h2 class="card-title">My Clubs</h2>
+          <p>You haven't joined any clubs yet.</p>
+        </div>
+      </div>
+    </ng-template>
+  </div>
   

@@ -4,16 +4,18 @@ form {
   }
   
   button {
-    background-color: rgba(23, 146, 142, 0.933);
+    background-color: #ff6d3d;
     color: white;
     font-weight: bold;
+    border: #323D4F;
   }
   
   button:hover {
-    background-color: rgba(12, 74, 72, 0.933);
+    background-color: #d8410e;
     color: white;
     font-weight: bold;
     cursor: pointer;
+    border: #323D4F;
   }
   
   h4 {
@@ -34,7 +36,7 @@ form {
   
   a {
     text-decoration: none;
-    color: rgba(23, 146, 142, 0.933);
+    color: #323D4F;
   }
   
   a:hover {

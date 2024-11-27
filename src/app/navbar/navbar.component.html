@@ -1,10 +1,19 @@
 <nav class="navbar">
+    <div class="navbar-logo">
+      <img src="assets/logo.png" alt="MyClubs Logo">
+    </div>
     <ul class="navbar-links">
-        <li><a routerLink="/home">Home Page</a></li>
-        <li><a routerLink="/clubs">Clubs Page</a></li>
-        <li><a routerLink="/profile">Profile Page</a></li>
-        <li><a routerLink="/login">Login</a></li>
-        <li> <a routerLink="/signup">Sign Up</a></li>
-        <li><button (click)="logout()" >Logout</button></li>
+      <li><a routerLink="/home">Home Page</a></li>
+      <li><a routerLink="/clubs">Clubs Page</a></li>
+      <li><a routerLink="/profile">Profile Page</a></li>
+      <li class="menu">
+        <button class="menu-button">Account</button>
+        <div class="menu-content">
+          <a routerLink="/login">Login</a>
+          <a routerLink="/signup">Sign Up</a>
+          <button (click)="logout()">Logout</button>
+        </div>
+      </li>
     </ul>
-</nav>
+  </nav>
+  

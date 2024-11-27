@@ -1,16 +1,101 @@
-.club-logo {
-    width: 100%; 
-    height: 200px; 
-    overflow: hidden; 
-    background-color: #f8f9fa; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
+.club-container {
+  margin: 20px auto;
+  max-width: 800px;
+  font-family: 'Roboto', sans-serif;
+  color: #323d4f;
+  padding: 10px;
+  padding-bottom: 35px;
+}
+
+.club-title h1 {
+  text-align: center;
+  font-size: 32px;
+  color: #1d4350;
+  margin-bottom: 20px;
+}
+
+.club-logo-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  margin-bottom: 20px;
+  width: 100%; 
+  max-width: 600px; 
+  height: 300px; 
+  margin: 0 auto; 
+  margin-bottom: 20px;
+}
+
+.club-logo-card img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+}
+
+.club-info-card,
+.club-description-card{
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.club-info-card h3,
+.club-description-card h3 {
+  font-size: 20px;
+  color: #1d4350;
+  margin-bottom: 10px;
+}
+
+.club-info-card p,
+.club-description-card p {
+  font-size: 16px;
+  color: #323d4f;
+  margin: 0;
+}
+
+.join-button {
+  display: block;
+  background-color: #ff6d3d;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0 auto;
+}
+
+.join-button:hover {
+  background-color: #d8410e;
+}
+
+@media (max-width: 600px) {
+  .club-logo-card {
+    max-width: 100%; /* Takes up full width on smaller screens */
+    height: 200px; /* Smaller height for mobile */
   }
-  
-  .club-logo img {
-    width: 100%; 
-    height: auto; 
-    object-fit: cover; 
+
+  .club-info-card,
+  .club-description-card,
+  .club-action-card {
+    padding: 15px;
   }
-  
+
+  .club-title h1 {
+    font-size: 28px;
+  }
+
+  .club-info-card h3,
+  .club-description-card h3 {
+    font-size: 18px;
+  }
+
+  .join-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
