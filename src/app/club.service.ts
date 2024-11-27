@@ -21,9 +21,12 @@ export class ClubService {
 
   joinClub(clubName: string, username: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/join_club/${clubName}`, { username: username });
-}
+  }
 
-
+  getClubMembers(club_name: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/clubs/${club_name}/members`);
+  }
+  
 
 
 }

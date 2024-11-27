@@ -11,6 +11,8 @@ import { StudentService } from '../student.service';
 })
 export class ClubComponent implements OnInit {
   club: Club | undefined;
+  members: any[] = [];
+  showMembers = false;
 
   constructor(
     private clubService: ClubService,
@@ -24,6 +26,7 @@ export class ClubComponent implements OnInit {
       this.clubService.getClubByName(club_name).subscribe(
         (data) => {
           this.club = data;
+          this.getClubMembers();
         },
         (error) => {
           console.error('Error fetching club:', error);
@@ -46,5 +49,25 @@ export class ClubComponent implements OnInit {
         error: (error) => alert('Error joining club: ' + error.message)
       });
     }
+  }
+
+
+
+  getClubMembers(): void {
+    if (this.club?.club_name) {
+      this.clubService.getClubMembers(this.club.club_name).subscribe(
+        (data) => {
+          this.members = data;
+        },
+        (error) => {
+          console.error('Error fetching club members:', error);
+          alert('Error fetching club members.');
+        }
+      );
+    }
+  }
+
+  toggleMembersList(): void {
+    this.showMembers = !this.showMembers; // Toggle the flag
   }
 }

@@ -249,6 +249,29 @@ def get_student_id(username):
         return jsonify({"id": student.id}), 200
     return jsonify({"error": "Student not found"}), 404
 
+#************************************************
+@app.route('/clubs/<club_name>/members', methods=['GET'])
+def get_club_members(club_name):
+    try:
+        club = Club.query.filter_by(club_name=club_name).first()
+        if not club:
+            return jsonify({'error': 'Club not found'}), 404
+
+        # Get members of the club
+        memberships = Membership.query.filter_by(club_id=club.id).all()
+        members = [
+            {
+                "id": membership.student.id,
+                "username": membership.student.username,
+                "first_name": membership.student.first_name,
+                "last_name": membership.student.last_name
+            }
+            for membership in memberships
+        ]
+        return jsonify(members), 200
+    except Exception as e:
+        print("Error fetching club members:", e)
+        return jsonify({'error': 'Failed to fetch club members'}), 500
 
 if __name__ == '__main__':
     create_tables()  # Initialize the database tables

@@ -18,6 +18,19 @@
   </div>
 
   <div class="club-action-card">
+
+    <div class="club members list">
+      <button (click)="toggleMembersList()">
+        {{ showMembers ? 'Hide' : 'Show' }} Members
+      </button>
+    
+      <!-- Conditional rendering of ClubMembersComponent
+      <app-club-members
+        *ngIf="showMembers"
+        [members]="members">
+      </app-club-members>
+    </div> -->
+
     <button class="join-button" (click)="joinClub()" *ngIf="club">Join Club</button>
   </div>
 </div>
