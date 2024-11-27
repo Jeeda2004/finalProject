@@ -11,7 +11,7 @@ form {
   }
   
   button:hover {
-    background-color: #d8410e;
+    background-color: #df5426;
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -30,16 +30,14 @@ form {
     text-align: center;
   }
   
-  small {
-    color: #888;
-  }
   
   a {
     text-decoration: none;
-    color: #323D4F;
+    color: #000000;
+    font-weight: bold;
   }
   
   a:hover {
-    color: rgba(12, 74, 72, 0.933);
+    font-weight:bolder
   }
-  
+

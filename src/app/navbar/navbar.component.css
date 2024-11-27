@@ -49,7 +49,6 @@
     padding: 0.5rem 1rem;
     border-radius: 4px;
     transition: all 0.3s ease;
-    font-family:monospace;
     font-size: large;
 }
 
@@ -99,9 +98,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-family: Arial, sans-serif;
     transition: background-color 0.3s ease;
-    font-family:monospace;
     font-size: large;
 }
 
@@ -113,7 +110,7 @@
     display: none;
     position: absolute;
     right: 0;
-    background-color: #687186;
+    background-color: #ff6d3d;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     overflow: hidden;
@@ -129,15 +126,13 @@
     text-align: left;
     background-color: transparent;
     border: none;
-    font-family: Arial, sans-serif;
     width: 100%;
     cursor: pointer;
-    font-family:monospace;
 }
 
 .menu-content a:hover,
 .menu-content button:hover {
-    background-color: #babbbe;
+    background-color: #df5426;
 }
 
 .menu:hover .menu-content {
