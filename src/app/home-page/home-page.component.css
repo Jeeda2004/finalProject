@@ -1,29 +1,107 @@
+/* Main container */
 .homepage-container {
-    margin: 20px auto;
-    padding: 20px;
-    max-width: 1200px;
-    color: #323d4f;
-  }
-  
-  .welc-section {
-    text-align: center;
-    background-color: #ff6d3d;
-    color: #fff;
-    padding: 40px 20px;
-    border-radius: 10px;
-  }
-  
-  .welc-section h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    font-family:monospace;
-    font-weight: bolder;
-  }
-  
-  .welc-section p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    /* font-family:monospace; */
-  }
-  
-  
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 1200px;
+  color: #323d4f;
+}
+
+/* Welcome Section */
+.welcome-section {
+  text-align: center;
+  background-color: #f8f9fa;
+  color: #1d4350;
+  padding: 40px 20px;
+  margin-bottom: 30px;
+}
+
+.welcome-section h1 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+  font-family: monospace;
+  font-weight: bolder;
+}
+
+.welcome-section p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* About Us Section */
+.about-us-section {
+  margin: 30px auto;
+  padding: 30px;
+  max-width: 900px;
+  background-color: #ff6d3d;
+  color: #fff;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.about-us-section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-family: monospace;
+}
+
+.about-us-section p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* How It Works Section */
+.how-it-works-section {
+  margin: 40px auto;
+  padding: 20px;
+  max-width: 900px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.how-it-works-section h2 {
+  font-size: 2rem;
+  color: #1d4350;
+  margin-bottom: 15px;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.how-it-works-section .steps {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.how-it-works-section .step {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1;
+  max-width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.how-it-works-section .step:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.how-it-works-section .step h3 {
+  font-size: 1.5rem;
+  color: #1d4350;
+  margin-bottom: 10px;
+}
+
+.how-it-works-section .step p {
+  font-size: 1rem;
+  color: #323d4f;
+}
